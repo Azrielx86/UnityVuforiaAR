@@ -1061,6 +1061,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1078664601}
   color: {r: 0.98929596, g: 0, b: 1, a: 0}
+  colors:
+  - {r: 0.24230155, g: 0.61473435, b: 0.9339623, a: 0}
+  - {r: 0.98823535, g: 0, b: 1, a: 0}
+  - {r: 0.16653132, g: 1, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.054944992, a: 0}
+  - {r: 1, g: 0.47070253, b: 0, a: 0}
   material: {fileID: 2100000, guid: 5f75a329f18e37345963a34a80f66678, type: 2}
 --- !u!114 &1219335645
 MonoBehaviour:
