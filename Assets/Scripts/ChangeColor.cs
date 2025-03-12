@@ -5,35 +5,47 @@ using UnityEngine;
 
 public class ChangeColor : MonoBehaviour
 {
+    private static readonly int MainTex = Shader.PropertyToID("_MainTex");
     public GameObject model;
-    public List<Color> colors;
     public Material material;
 
+    public List<Texture> textures;
+
     private Color _defaultModelColor;
+    private Texture _defaultModelTexture;
     private Color _defaultMaterialColor;
     private bool _hasColorChanged;
-    private int _colorIndex = 0;
 
     void Start()
     {
-        _defaultModelColor = model.GetComponent<Renderer>().material.color;
+        _defaultModelTexture = model.GetComponent<Renderer>().material.mainTexture;
         _defaultMaterialColor = material.color;
-        _colorIndex = -1;
     }
 
+    public void RestoreMaterials()
+    {
+        model.GetComponent<Renderer>().material.SetTexture(MainTex, _defaultModelTexture);
+        material.color = _defaultMaterialColor;
+    }
+    
     public void DoChangeColor()
     {
-        _colorIndex++;
-        if (_colorIndex >= colors.Count)
-        {
-            model.GetComponent<Renderer>().material.color = _defaultModelColor;
-            material.color = _defaultMaterialColor;
-            _colorIndex = -1;
-        }
-        else
-        {
-            model.GetComponent<Renderer>().material.color = colors[_colorIndex];
-            material.color = colors[_colorIndex];
-        }
+        material.color = GenerateRandomColor(Color.white, 0.8f);
+        var newTex = textures[Random.Range(0, textures.Count)];
+        model.GetComponent<Renderer>().material.SetTexture(MainTex, newTex);
+    }
+
+    private static Color GenerateRandomColor(Color mix, float mixRatio)
+    {
+
+        var randRed = Random.Range(0, 256);
+        var randGreen = Random.Range(0, 256);
+        var randBlue = Random.Range(0, 256);
+
+        var red = (randRed + mix.r) * mixRatio;
+        var green = (randGreen + mix.g) * mixRatio;
+        var blue = (randBlue + mix.b) * mixRatio;
+
+        return new Color(red / 256.0f, green / 256.0f, blue / 256.0f);
     }
 }
