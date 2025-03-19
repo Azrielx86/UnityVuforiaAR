@@ -37,7 +37,6 @@ public class ChangeColor : MonoBehaviour
 
     private static Color GenerateRandomColor(Color mix, float mixRatio)
     {
-
         var randRed = Random.Range(0, 256);
         var randGreen = Random.Range(0, 256);
         var randBlue = Random.Range(0, 256);
